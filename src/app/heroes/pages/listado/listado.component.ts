@@ -1,4 +1,7 @@
+import { HeroesService } from './../../services/heroes.service';
 import { Component } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Heroes } from '../../interfaces/heroes.interface';
 
 @Component({
   selector: 'app-listado',
@@ -7,4 +10,14 @@ import { Component } from '@angular/core';
 })
 export class ListadoComponent {
 
+  heroes$?:Observable<Heroes[]>
+
+  constructor(
+    private _HeroesService: HeroesService,
+  ) { }
+
+  ngOnInit(): void {
+    this.heroes$ = this._HeroesService.getHeroes()
+
+  }
 }

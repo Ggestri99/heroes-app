@@ -8,6 +8,8 @@ import { ListadoComponent } from './pages/listado/listado.component';
 import { HeroesRoutingModule } from './heroes-routing.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MaterialModule } from '../material/material.module';
+import { HeroeTarjetaComponent } from './components/heroe-tarjeta/heroe-tarjeta.component';
+import { ImagePipe } from './pipes/image.pipe';
 
 
 
@@ -18,6 +20,8 @@ import { MaterialModule } from '../material/material.module';
     HeroeComponent,
     HomeComponent,
     ListadoComponent,
+    HeroeTarjetaComponent,
+    ImagePipe,
   ],
   imports: [
     CommonModule,
