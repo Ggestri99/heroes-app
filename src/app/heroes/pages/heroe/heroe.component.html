@@ -5,5 +5,15 @@
 </mat-grid-list>
 
 <ng-template #divHeore>
-  {{heroe | json}}
+  <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="30px">
+    <div fxFlex="50">
+      <h1>{{heroe.superhero}}<small>- {{heroe.alter_ego}}</small></h1>
+      <mat-divider></mat-divider>
+      <br>
+      <img [src]="heroe | image" alt="">
+    </div>
+    <div fxFlex="50">
+
+    </div>
+  </div>
 </ng-template>
