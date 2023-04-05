@@ -16,6 +16,10 @@ export class HeroesService {
   ) {
    }
 
+   getSugerencias(termino:string): Observable<Heroes[]>{
+    return this.http.get<Heroes[]>(`${this.baseUrl}/heroes/${termino}`)
+   }
+
    getHeroes():Observable<Heroes[]>{
     return this.http.get<Heroes[]>(`${this.baseUrl}/heroes`)
    }
