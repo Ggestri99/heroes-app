@@ -17,7 +17,7 @@ export class HeroesService {
    }
 
    getSugerencias(termino:string): Observable<Heroes[]>{
-    return this.http.get<Heroes[]>(`${this.baseUrl}/heroes/${termino}`)
+    return this.http.get<Heroes[]>(`${this.baseUrl}/heroes?q=${ termino }&_limit=6`)
    }
 
    getHeroes():Observable<Heroes[]>{

@@ -10,9 +10,10 @@ import { Observable } from 'rxjs';
   styleUrls: ['./buscar.component.css']
 })
 export class BuscarComponent {
-  termino = ''
+  termino:string = ''
   heroes?: Heroes[]
-  heroeSeleccionado?: Heroes
+  heroeSeleccionado?: Heroes;
+  estado?:boolean = true
 
 
   constructor (
@@ -22,11 +23,18 @@ export class BuscarComponent {
   }
 
   buscando() {
-    this._HeroesService.getSugerencias(this.termino).subscribe(heroes => this.heroes = heroes)
-    console.log(this.termino)
-  }
+
+    this._HeroesService.getSugerencias(this.termino.trim()).subscribe(heroes => this.heroes = heroes)
+    console.log(this.termino)}
+
+
 
   opcionSeleccionada(e:MatAutocompleteSelectedEvent) {
+
+    if(!e.option.value){
+      this.heroeSeleccionado = undefined
+      return
+    }
     const heroe:Heroes = e.option.value
     this.termino = heroe.superhero
 
