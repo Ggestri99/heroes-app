@@ -14,21 +14,29 @@ export class HeroesService {
   constructor(
     private http: HttpClient
   ) {
-   }
+  }
 
-   getSugerencias(termino:string): Observable<Heroes[]>{
-    return this.http.get<Heroes[]>(`${this.baseUrl}/heroes?q=${ termino }&_limit=6`)
-   }
+  getSugerencias(termino: string): Observable<Heroes[]> {
+    return this.http.get<Heroes[]>(`${this.baseUrl}/heroes?q=${termino}&_limit=6`)
+  }
 
-   getHeroes():Observable<Heroes[]>{
+  getHeroes(): Observable<Heroes[]> {
     return this.http.get<Heroes[]>(`${this.baseUrl}/heroes`)
-   }
+  }
 
-   getHeroePorId(id:string):Observable<Heroes>{
+  getHeroePorId(id: string): Observable<Heroes> {
     return this.http.get<Heroes>(`${this.baseUrl}/heroes/${id}`)
-   }
+  }
 
-   agregarHeroe( heroe:any ):Observable<Heroes>{
+  agregarHeroe(heroe: any): Observable<Heroes> {
     return this.http.post<Heroes>(`${this.baseUrl}/heroes`, heroe)
-   }
+  }
+
+  actualizarHeroe(heroe: any): Observable<Heroes> {
+    return this.http.put<Heroes>(`${this.baseUrl}/heroes/${heroe.id}`, heroe)
+  }
+
+  // borrarHeroe(heroe: any): Observable<Heroes> {
+  //   return this.http.delete<Heroes>(`${this.baseUrl}/heroes/${heroe.id}`, heroe)
+  // }
 }

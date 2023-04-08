@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { Heroes } from '../../interfaces/heroes.interface';
 import { Publisher } from '../../interfaces/heroes.interface';
 import { HeroesService } from '../../services/heroes.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-agregar',
@@ -22,9 +24,19 @@ export class AgregarComponent {
 
   constructor(
     private _heroesService: HeroesService,
-  ){
-
+    private activatedRouter: ActivatedRoute,
+    private router: Router,
+  ) {
   }
+
+  ngOnInit(): void {
+    this.activatedRouter.params.pipe(
+      switchMap(({ id }) => this._heroesService.getHeroePorId(id))
+    ).subscribe(
+      heroe => this.heroe = heroe
+    )
+  }
+
   publishers = [
     {
       id: 'DC Comics',
@@ -37,14 +49,28 @@ export class AgregarComponent {
   ]
 
   guardar() {
-    if(this.heroe.superhero.trim().length === 0) {
+    if (this.heroe.superhero.trim().length === 0) {
       return
+    }
+
+    if(this.heroe.id) {
+      //Actualizar
+      this._heroesService.actualizarHeroe(this.heroe)
+      .subscribe( heroe => console.log('Actulizando heroe:',heroe) )
     } else {
-      this._heroesService.agregarHeroe( this.heroe ).subscribe(
-        resp => {
-          console.log('respuesta:', this.heroe)
+      //Crear nuevo registro
+      this._heroesService.agregarHeroe(this.heroe).subscribe(
+        heroe => {
+         this.router.navigate(['/heroes/editar', heroe.id])
         }
       )
     }
+
+
+
+
+
+
+
   }
 }
