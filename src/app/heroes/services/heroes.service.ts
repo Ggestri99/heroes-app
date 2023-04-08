@@ -27,4 +27,8 @@ export class HeroesService {
    getHeroePorId(id:string):Observable<Heroes>{
     return this.http.get<Heroes>(`${this.baseUrl}/heroes/${id}`)
    }
+
+   agregarHeroe( heroe:any ):Observable<Heroes>{
+    return this.http.post<Heroes>(`${this.baseUrl}/heroes`, heroe)
+   }
 }
