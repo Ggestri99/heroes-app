@@ -30,11 +30,18 @@ export class AgregarComponent {
   }
 
   ngOnInit(): void {
-    this.activatedRouter.params.pipe(
-      switchMap(({ id }) => this._heroesService.getHeroePorId(id))
-    ).subscribe(
-      heroe => this.heroe = heroe
-    )
+
+    if (!this.router.url.includes('editar')) {
+      return
+    } else {
+      this.activatedRouter.params.pipe(
+        switchMap(({ id }) => this._heroesService.getHeroePorId(id))
+      ).subscribe(
+        heroe => this.heroe = heroe
+      )
+
+    }
+
   }
 
   publishers = [
@@ -53,15 +60,15 @@ export class AgregarComponent {
       return
     }
 
-    if(this.heroe.id) {
+    if (this.heroe.id) {
       //Actualizar
       this._heroesService.actualizarHeroe(this.heroe)
-      .subscribe( heroe => console.log('Actulizando heroe:',heroe) )
+        .subscribe(heroe => console.log('Actulizando heroe:', heroe))
     } else {
       //Crear nuevo registro
       this._heroesService.agregarHeroe(this.heroe).subscribe(
         heroe => {
-         this.router.navigate(['/heroes/editar', heroe.id])
+          this.router.navigate(['/heroes/editar', heroe.id])
         }
       )
     }
