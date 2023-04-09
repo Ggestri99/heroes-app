@@ -72,12 +72,13 @@ export class AgregarComponent {
         }
       )
     }
+  }
 
-
-
-
-
-
-
+  borrar(){
+    this._heroesService.borrarHeroe(this.heroe.id!).subscribe(
+      resp => {
+        this.router.navigate(['/heroes']);
+      }
+    )
   }
 }
