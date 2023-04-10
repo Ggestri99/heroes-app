@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { AutToutingModule } from './aut-routing.module';
+import { MaterialModule } from '../material/material.module';
 
 
 
@@ -14,6 +15,7 @@ import { AutToutingModule } from './aut-routing.module';
   imports: [
     CommonModule,
     AutToutingModule,
+    MaterialModule
   ]
 })
 export class AutModule { }
